@@ -1,0 +1,25 @@
+{
+    "name" : "paypal-adaptive-payments",
+    "version": "0.0.1",
+    "author" : "Gonzalo Aguirre",
+    "description" : "Paypal Adaptive Payments SDK in node.js",
+    "main": "./lib/paypal-adaptive-payments.js",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/gaguirre/paypal-adaptive-sdk-nodejs.git"
+    },
+    "keywords": [
+        "api"
+      , "paypal"
+      , "adaptive"
+      , "payment"
+      , "sdk"
+      , "node"
+    ],
+    "dependencies" : {
+        "request": "2.11.4"
+    },
+    "engine" : {
+        "node" : ">=0.6"
+    }
+}
