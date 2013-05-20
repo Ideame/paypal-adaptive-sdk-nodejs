@@ -1,5 +1,5 @@
 {
-    "name" : "paypal-adaptive-payments",
+    "name" : "paypal-adaptive",
     "version": "0.0.1",
     "author" : "Gonzalo Aguirre",
     "description" : "Paypal Adaptive Payments SDK in node.js",
