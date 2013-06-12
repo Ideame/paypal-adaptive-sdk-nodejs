@@ -20,6 +20,11 @@
     "dependencies" : {
         "request": "2.11.4"
     },
+    "devDependencies": {
+        "mocha": "1.10.0",
+        "supertest": "0.5.1",
+        "sinon": "1.5.2"
+    },
     "engine" : {
         "node": ">=0.6"
     }
