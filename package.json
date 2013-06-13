@@ -1,6 +1,6 @@
 {
     "name" : "paypal-adaptive",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author" : "Gonzalo Aguirre",
     "description" : "Paypal Adaptive (Payments & Accounts) SDK in node.js",
     "main": "./lib/paypal-adaptive.js",
