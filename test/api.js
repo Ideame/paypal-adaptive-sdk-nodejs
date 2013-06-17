@@ -2,14 +2,14 @@ var nock = require('nock')
     , assert = require('assert')
     , Paypal = require('..');
 
-describe('callApi method', function() {
-    var paypalConfig = {
-        userId: 'mockUserId',
-        password: 'mockPassword',
-        signature: 'mockSignature',
-        sandbox: true
-    };
+var paypalConfig = {
+    userId: 'mockUserId',
+    password: 'mockPassword',
+    signature: 'mockSignature',
+    sandbox: true
+};
 
+describe('callApi method', function() {
     it('should POST with correct header', function(done) {
         var mockResponse = { jjx: 'jjx' };
 
@@ -83,6 +83,32 @@ describe('callApi method', function() {
         var okResponse = {
             responseEnvelope: {
                 ack: 'Success'
+            },
+            mock: 'mock'
+        };
+
+        var mockHttp = nock('https://svcs.sandbox.paypal.com')
+            .post('/ok-response', {})
+            .reply(200, okResponse);
+
+
+        var api = new Paypal(paypalConfig);
+
+        api.callApi('ok-response', {}, function(err, res) {
+            assert.equal(err, null);
+
+            okResponse.httpStatusCode = 200;
+            assert.deepEqual(res, okResponse);
+
+            mockHttp.done();
+            done();
+        });
+    });
+
+    it('should return OK when Paypal response ack is SuccessWithWarning', function(done) {
+        var okResponse = {
+            responseEnvelope: {
+                ack: 'SuccessWithWarning'
             },
             mock: 'mock'
         };
