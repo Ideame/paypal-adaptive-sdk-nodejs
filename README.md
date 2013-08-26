@@ -159,38 +159,48 @@ Node.js sdk for Paypal Adaptive Payments and Paypal Adaptive Accounts APIs, with
         },
         // another data required by API method
     };
+    
+    var callback = function (err, response) {
+    	if (err) {
+    	    // Handle error
+            console.log(err);
+        } else {
+            // Paypal response
+            console.log(response)
+        }
+    };
 
     // For Adaptive Payments
-    paypalSdk.cancelPreapproval(payload, function (err, response) {...} });
+    paypalSdk.cancelPreapproval(payload, callback);
 
-    paypalSdk.convertCurrency(payload, function (err, response) {...} });
+    paypalSdk.convertCurrency(payload, callback);
 
-    paypalSdk.executePayment(payload, function (err, response) {...} });
+    paypalSdk.executePayment(payload, callback);
 
-    paypalSdk.getFundingPlans(payload, function (err, response) {...} });
+    paypalSdk.getFundingPlans(payload, callback);
 
-    paypalSdk.getShippingAddresses(payload, function (err, response) {...} });
+    paypalSdk.getShippingAddresses(payload, callback);
 
-    paypalSdk.preapprovalDetails(payload, function (err, response) {...} });
+    paypalSdk.preapprovalDetails(payload, callback);
 
-    paypalSdk.setPaymentOptions(payload, function (err, response) {...} });
+    paypalSdk.setPaymentOptions(payload, callback);
 
     // For Adaptive Accounts
-    paypalSdk.addBankAccount(payload, function (err, response) {...} });
+    paypalSdk.addBankAccount(payload, callback);
 
-    paypalSdk.addPaymentCard(payload, function (err, response) {...} });
+    paypalSdk.addPaymentCard(payload, callback);
 
-    paypalSdk.checkComplianceStatus(payload, function (err, response) {...} });
+    paypalSdk.checkComplianceStatus(payload, callback);
 
-    paypalSdk.createAccount(payload, function (err, response) {...} });
+    paypalSdk.createAccount(payload, callback);
 
-    paypalSdk.getUserAgreement(payload, function (err, response) {...} });
+    paypalSdk.getUserAgreement(payload, callback);
 
-    paypalSdk.getVerifiedStatus(payload, function (err, response) {...} });
+    paypalSdk.getVerifiedStatus(payload, callback);
 
-    paypalSdk.setFundingSourceConfirmed(payload, function (err, response) {...} });
+    paypalSdk.setFundingSourceConfirmed(payload, callback);
 
-    paypalSdk.updateComplianceStatus(payload, function (err, response) {...} });
+    paypalSdk.updateComplianceStatus(payload, callback);
   ```
 
 ### Tests
