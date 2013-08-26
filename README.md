@@ -150,8 +150,48 @@ Node.js sdk for Paypal Adaptive Payments and Paypal Adaptive Accounts APIs, with
     ```
 
   **Note:**  
-  The reason why not all methods are available it's because you can use the generic method *callApi* to make a request to any API method.  
-  However, methods could be added if needed. Just send a pull request.
+  The other API methods has default behavior by now: you send a payload and obtains the Paypal original response.
+
+  ```js
+    var payload = {
+        requestEnvelope: {
+            errorLanguage:  'en_US'
+        },
+        // another data required by API method
+    };
+
+    // For Adaptive Payments
+    paypalSdk.cancelPreapproval(payload, function (err, response) {...} });
+
+    paypalSdk.convertCurrency(payload, function (err, response) {...} });
+
+    paypalSdk.executePayment(payload, function (err, response) {...} });
+
+    paypalSdk.getFundingPlans(payload, function (err, response) {...} });
+
+    paypalSdk.getShippingAddresses(payload, function (err, response) {...} });
+
+    paypalSdk.preapprovalDetails(payload, function (err, response) {...} });
+
+    paypalSdk.setPaymentOptions(payload, function (err, response) {...} });
+
+    // For Adaptive Accounts
+    paypalSdk.addBankAccount(payload, function (err, response) {...} });
+
+    paypalSdk.addPaymentCard(payload, function (err, response) {...} });
+
+    paypalSdk.checkComplianceStatus(payload, function (err, response) {...} });
+
+    paypalSdk.createAccount(payload, function (err, response) {...} });
+
+    paypalSdk.getUserAgreement(payload, function (err, response) {...} });
+
+    paypalSdk.getVerifiedStatus(payload, function (err, response) {...} });
+
+    paypalSdk.setFundingSourceConfirmed(payload, function (err, response) {...} });
+
+    paypalSdk.updateComplianceStatus(payload, function (err, response) {...} });
+  ```
 
 ### Tests
   Tests can be runned with:
