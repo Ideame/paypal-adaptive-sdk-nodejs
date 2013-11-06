@@ -4,8 +4,7 @@ Node.js sdk for Paypal Adaptive Payments and Paypal Adaptive Accounts APIs, with
 
 ### Usage
   * Add dependency 'paypal-adaptive' in your package.json file.
-  * Require 'paypal-adaptive' in your file.
-
+  * Require 'paypal-adaptive' in your file. 
     ```js
     var Paypal = require('paypal-adaptive');
 
@@ -40,168 +39,169 @@ Node.js sdk for Paypal Adaptive Payments and Paypal Adaptive Accounts APIs, with
     ```
 
 ### API
-  * GetPaymentOptions
-    ```js
-    var payKey = 'AP-1234567890';
+#### GetPaymentOptions 
 
-    paypalSdk.getPaymentOptions(payKey, function (err, response) {
-        if (err) {
-            console.log(err);
-        } else {
-            // payments options for this payKey
-            console.log(response);
-        }
-    });
-    ```
+```js
+var payKey = 'AP-1234567890';
 
-  * PaymentDetails
-    ```js
-    // One of this params is required
-    // The payKey
-    var params = {
-        payKey: 'AP-1234567890'
-    };
-    // Or the transactionId
-    var params = {
-        transactionId: 'AP-1234567890'
-    };
-    // Or the trackingId
-    var params = {
-        trackingId: 'AP-1234567890'
-    };
-
-    paypalSdk.paymentDetails(params, function (err, response) {
-        if (err) {
-            console.log(err);
-        } else {
-            // payments details for this payKey, transactionId or trackingId
-            console.log(response);
-        }
-    });
-    ```
-
-  * Pay
-    ```js
-    var payload = {
-        requestEnvelope: {
-            errorLanguage:  'en_US'
-        },
-        actionType:     'PAY',
-        currencyCode:   'USD',
-        feesPayer:      'EACHRECEIVER',
-        memo:           'Chained payment example',
-        cancelUrl:      'http://test.com/cancel',
-        returnUrl:      'http://test.com/success',
-        receiverList: {
-            receiver: [
-                {
-                    email:  'primary@test.com',
-                    amount: '100.00',
-                    primary:'true'
-                },
-                {
-                    email:  'secondary@test.com',
-                    amount: '10.00',
-                    primary:'false'
-                }
-            ]
-        }
-    };
-
-    paypalSdk.pay(payload, function (err, response) {
-        if (err) {
-            console.log(err);
-        } else {
-            // Response will have the original Paypal API response
-            console.log(response);
-            // But also a paymentApprovalUrl, so you can redirect the sender to checkout easily
-            console.log('Redirect to %s', response.paymentApprovalUrl);
-        }
-    });
-    ```
-
-  * Preapproval
-    ```js
-    var payload = {
-        currencyCode:                   'USD',
-        startingDate:                   new Date().toISOString(),
-        endingDate:                     new Date('2020-01-01').toISOString(),
-        returnUrl:                      'http://your-website.com',
-        cancelUrl:                      'http://your-website.com',
-        ipnNotificationUrl:             'http://your-ipn-listener.com',
-        maxNumberOfPayments:            1,
-        displayMaxTotalAmount:          true,
-        maxTotalAmountOfAllPayments:    '100.00',
-        requestEnvelope: {
-            errorLanguage:  'en_US'
-        }
+paypalSdk.getPaymentOptions(payKey, function (err, response) {
+    if (err) {
+        console.log(err);
+    } else {
+        // payments options for this payKey
+        console.log(response);
     }
+});
+```
 
-    paypalSdk.preapproval(payload, function (err, response) {
-        if (err) {
-            console.log(err);
-        } else {
-            // Response will have the original Paypal API response
-            console.log(response);
-            // But also a prepprovalUrl, so you can redirect the sender to approve the payment easily
-            console.log('Redirect to %s', response.prepprovalUrl);
-        }
-    });
-    ```
+#### PaymentDetails
+```js
+// One of this params is required
+// The payKey
+var params = {
+    payKey: 'AP-1234567890'
+};
+// Or the transactionId
+var params = {
+    transactionId: 'AP-1234567890'
+};
+// Or the trackingId
+var params = {
+    trackingId: 'AP-1234567890'
+};
 
-  **Note:**  
-  The other API methods has default behavior by now: you send a payload and obtains the Paypal original response.
+paypalSdk.paymentDetails(params, function (err, response) {
+    if (err) {
+        console.log(err);
+    } else {
+        // payments details for this payKey, transactionId or trackingId
+        console.log(response);
+    }
+});
+```
 
-  ```js
-    var payload = {
-        requestEnvelope: {
-            errorLanguage:  'en_US'
-        },
-        // another data required by API method
-    };
-    
-    var callback = function (err, response) {
-    	if (err) {
-    	    // Handle error
-            console.log(err);
-        } else {
-            // Paypal response
-            console.log(response)
-        }
-    };
+#### Pay
+```js
+var payload = {
+    requestEnvelope: {
+        errorLanguage:  'en_US'
+    },
+    actionType:     'PAY',
+    currencyCode:   'USD',
+    feesPayer:      'EACHRECEIVER',
+    memo:           'Chained payment example',
+    cancelUrl:      'http://test.com/cancel',
+    returnUrl:      'http://test.com/success',
+    receiverList: {
+        receiver: [
+            {
+                email:  'primary@test.com',
+                amount: '100.00',
+                primary:'true'
+            },
+            {
+                email:  'secondary@test.com',
+                amount: '10.00',
+                primary:'false'
+            }
+        ]
+    }
+};
 
-    // For Adaptive Payments
-    paypalSdk.cancelPreapproval(payload, callback);
+paypalSdk.pay(payload, function (err, response) {
+    if (err) {
+        console.log(err);
+    } else {
+        // Response will have the original Paypal API response
+        console.log(response);
+        // But also a paymentApprovalUrl, so you can redirect the sender to checkout easily
+        console.log('Redirect to %s', response.paymentApprovalUrl);
+    }
+});
+```
 
-    paypalSdk.convertCurrency(payload, callback);
+#### Preapproval
+```js
+var payload = {
+    currencyCode:                   'USD',
+    startingDate:                   new Date().toISOString(),
+    endingDate:                     new Date('2020-01-01').toISOString(),
+    returnUrl:                      'http://your-website.com',
+    cancelUrl:                      'http://your-website.com',
+    ipnNotificationUrl:             'http://your-ipn-listener.com',
+    maxNumberOfPayments:            1,
+    displayMaxTotalAmount:          true,
+    maxTotalAmountOfAllPayments:    '100.00',
+    requestEnvelope: {
+        errorLanguage:  'en_US'
+    }
+}
 
-    paypalSdk.executePayment(payload, callback);
+paypalSdk.preapproval(payload, function (err, response) {
+    if (err) {
+        console.log(err);
+    } else {
+        // Response will have the original Paypal API response
+        console.log(response);
+        // But also a prepprovalUrl, so you can redirect the sender to approve the payment easily
+        console.log('Redirect to %s', response.prepprovalUrl);
+    }
+});
+```
 
-    paypalSdk.getFundingPlans(payload, callback);
+**Note:**  
+The other API methods has default behavior by now: you send a payload and obtains the Paypal original response.
 
-    paypalSdk.getShippingAddresses(payload, callback);
+```js
+var payload = {
+    requestEnvelope: {
+        errorLanguage:  'en_US'
+    },
+    // another data required by API method
+};
 
-    paypalSdk.preapprovalDetails(payload, callback);
+var callback = function (err, response) {
+    if (err) {
+        // Handle error
+        console.log(err);
+    } else {
+        // Paypal response
+        console.log(response)
+    }
+};
 
-    paypalSdk.setPaymentOptions(payload, callback);
+// For Adaptive Payments
+paypalSdk.cancelPreapproval(payload, callback);
 
-    // For Adaptive Accounts
-    paypalSdk.addBankAccount(payload, callback);
+paypalSdk.convertCurrency(payload, callback);
 
-    paypalSdk.addPaymentCard(payload, callback);
+paypalSdk.executePayment(payload, callback);
 
-    paypalSdk.checkComplianceStatus(payload, callback);
+paypalSdk.getFundingPlans(payload, callback);
 
-    paypalSdk.createAccount(payload, callback);
+paypalSdk.getShippingAddresses(payload, callback);
 
-    paypalSdk.getUserAgreement(payload, callback);
+paypalSdk.preapprovalDetails(payload, callback);
 
-    paypalSdk.getVerifiedStatus(payload, callback);
+paypalSdk.setPaymentOptions(payload, callback);
 
-    paypalSdk.setFundingSourceConfirmed(payload, callback);
+// For Adaptive Accounts
+paypalSdk.addBankAccount(payload, callback);
 
-    paypalSdk.updateComplianceStatus(payload, callback);
-  ```
+paypalSdk.addPaymentCard(payload, callback);
+
+paypalSdk.checkComplianceStatus(payload, callback);
+
+paypalSdk.createAccount(payload, callback);
+
+paypalSdk.getUserAgreement(payload, callback);
+
+paypalSdk.getVerifiedStatus(payload, callback);
+
+paypalSdk.setFundingSourceConfirmed(payload, callback);
+
+paypalSdk.updateComplianceStatus(payload, callback);
+```
 
 ### Tests
   Tests can be runned with:
