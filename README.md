@@ -143,8 +143,8 @@ paypalSdk.preapproval(payload, function (err, response) {
     } else {
         // Response will have the original Paypal API response
         console.log(response);
-        // But also a prepprovalUrl, so you can redirect the sender to approve the payment easily
-        console.log('Redirect to %s', response.prepprovalUrl);
+        // But also a preapprovalUrl, so you can redirect the sender to approve the payment easily
+        console.log('Redirect to %s', response.preapprovalUrl);
     }
 });
 ```
