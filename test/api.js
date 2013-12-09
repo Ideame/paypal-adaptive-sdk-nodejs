@@ -34,6 +34,37 @@ describe('callApi method', function() {
         });
     });
 
+    it('should POST with header X-PAYPAL-SANDBOX-EMAIL-ADDRESS if sandboxEmailAddress was provided on config', function(done) {
+        var mockResponse = { jjx: 'jjx' };
+
+        var mockHttp = nock('https://svcs.sandbox.paypal.com')
+            .matchHeader('X-PAYPAL-SECURITY-USERID', 'mockUserId')
+            .matchHeader('X-PAYPAL-SECURITY-PASSWORD', 'mockPassword')
+            .matchHeader('X-PAYPAL-SECURITY-SIGNATURE', 'mockSignature')
+            .matchHeader('X-PAYPAL-APPLICATION-ID', 'APP-80W284485P519543T')
+            .matchHeader('X-PAYPAL-REQUEST-DATA-FORMAT', 'JSON')
+            .matchHeader('X-PAYPAL-RESPONSE-DATA-FORMAT', 'JSON')
+            .matchHeader('X-PAYPAL-SANDBOX-EMAIL-ADDRESS', 'mockEmailAddress')
+            .post('/just-for-check-sandbox-email-address', {})
+            .reply(400, mockResponse);
+
+        var api = new Paypal({
+            userId: 'mockUserId',
+            password: 'mockPassword',
+            signature: 'mockSignature',
+            sandbox: true,
+            sandboxEmailAddress: 'mockEmailAddress'
+        });
+
+        api.callApi('just-for-check-sandbox-email-address', {}, function(err, res) {
+            assert.equal(err.httpStatusCode, 400);
+            assert.deepEqual(err.response, mockResponse);
+
+            mockHttp.done();
+            done();
+        });
+    });
+
     it('should return error when status is not 200', function(done) {
         var mockResponse = { jjx: 'jjx' };
 

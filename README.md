@@ -12,7 +12,7 @@ Node.js sdk for Paypal Adaptive Payments and Paypal Adaptive Accounts APIs, with
 	    userId:    'userId',
 	    password:  'password',
 	    signature: 'signature',
-	    sandbox:   true
+	    sandbox:   true //defaults to false
 	});
     ```
   * Call to sdk methods or to the generic method callApi. If you get an error, you can check the response too for better error handling.
@@ -193,6 +193,7 @@ paypalSdk.addPaymentCard(payload, callback);
 paypalSdk.checkComplianceStatus(payload, callback);
 
 paypalSdk.createAccount(payload, callback);
+// To use this method you can set X-PAYPAL-SANDBOX-EMAIL-ADDRESS header passing 'sandboxEmailAddress' property on config
 
 paypalSdk.getUserAgreement(payload, callback);
 
