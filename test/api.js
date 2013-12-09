@@ -34,7 +34,7 @@ describe('callApi method', function() {
         });
     });
 
-    it('should POST with header X-PAYPAL-SANDBOX-EMAIL-ADDRESS if sandboxEmailAddress was provided on config', function(done) {
+    it('should POST with header additional headers X-PAYPAL-SANDBOX-EMAIL-ADDRESS and X-PAYPAL-DEVICE-IPADDRESS if were provided on config', function(done) {
         var mockResponse = { jjx: 'jjx' };
 
         var mockHttp = nock('https://svcs.sandbox.paypal.com')
@@ -45,7 +45,8 @@ describe('callApi method', function() {
             .matchHeader('X-PAYPAL-REQUEST-DATA-FORMAT', 'JSON')
             .matchHeader('X-PAYPAL-RESPONSE-DATA-FORMAT', 'JSON')
             .matchHeader('X-PAYPAL-SANDBOX-EMAIL-ADDRESS', 'mockEmailAddress')
-            .post('/just-for-check-sandbox-email-address', {})
+            .matchHeader('X-PAYPAL-DEVICE-IPADDRESS', 'mockIpAddress')
+            .post('/just-for-check-extra-headers', {})
             .reply(400, mockResponse);
 
         var api = new Paypal({
@@ -53,10 +54,11 @@ describe('callApi method', function() {
             password: 'mockPassword',
             signature: 'mockSignature',
             sandbox: true,
-            sandboxEmailAddress: 'mockEmailAddress'
+            sandboxEmailAddress: 'mockEmailAddress',
+            deviceIpAddress: 'mockIpAddress'
         });
 
-        api.callApi('just-for-check-sandbox-email-address', {}, function(err, res) {
+        api.callApi('just-for-check-extra-headers', {}, function(err, res) {
             assert.equal(err.httpStatusCode, 400);
             assert.deepEqual(err.response, mockResponse);
 

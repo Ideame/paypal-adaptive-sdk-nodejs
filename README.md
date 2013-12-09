@@ -193,7 +193,7 @@ paypalSdk.addPaymentCard(payload, callback);
 paypalSdk.checkComplianceStatus(payload, callback);
 
 paypalSdk.createAccount(payload, callback);
-// To use this method you can set X-PAYPAL-SANDBOX-EMAIL-ADDRESS header passing 'sandboxEmailAddress' property on config
+// To use this method you can set X-PAYPAL-SANDBOX-EMAIL-ADDRESS and X-PAYPAL-DEVICE-IPADDRESS headers passing 'sandboxEmailAddress' and 'deviceIpAddress' properties on config
 
 paypalSdk.getUserAgreement(payload, callback);
 
