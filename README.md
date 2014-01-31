@@ -205,7 +205,7 @@ paypalSdk.updateComplianceStatus(payload, callback);
 ```
 
 ### Tests
-  Tests can be runned with:
+  Tests can be ran with:
 
   ```sh
   mocha
