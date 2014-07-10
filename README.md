@@ -4,7 +4,7 @@ Node.js sdk for Paypal Adaptive Payments and Paypal Adaptive Accounts APIs, with
 
 ### Usage
   * Add dependency 'paypal-adaptive' in your package.json file.
-  * Require 'paypal-adaptive' in your file. 
+  * Require 'paypal-adaptive' in your file.
     ```js
     var Paypal = require('paypal-adaptive');
 
@@ -39,7 +39,7 @@ Node.js sdk for Paypal Adaptive Payments and Paypal Adaptive Accounts APIs, with
     ```
 
 ### API
-#### GetPaymentOptions 
+#### GetPaymentOptions
 
 ```js
 var payKey = 'AP-1234567890';
@@ -149,7 +149,7 @@ paypalSdk.preapproval(payload, function (err, response) {
 });
 ```
 
-**Note:**  
+**Note:**
 The other API methods has default behavior by now: you send a payload and obtains the Paypal original response.
 
 ```js
@@ -212,5 +212,8 @@ paypalSdk.updateComplianceStatus(payload, callback);
   ```
 
 ### Reference
-  <a href="https://developer.paypal.com/webapps/developer/docs/classic/api/#ap" target="_blank">Paypal Adaptive Payments</a>  
+  <a href="https://developer.paypal.com/webapps/developer/docs/classic/api/#ap" target="_blank">Paypal Adaptive Payments</a>
   <a href="https://developer.paypal.com/webapps/developer/docs/classic/api/#aa" target="_blank">Paypal Adaptive Accounts</a>
+
+### License
+  Copyright (c) 2014 Gonzalo Aguirre. See the LICENSE file for license rights and limitations (MIT).
